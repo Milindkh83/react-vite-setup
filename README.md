@@ -11,6 +11,7 @@ It includes:
 * React Hook Form
 * Axios for API calls
 * Environment configuration
+* Tailwind CSS for styling
 
 The project follows **clean architecture, reusable components, and consistent coding standards**.
 

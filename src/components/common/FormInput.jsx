@@ -11,12 +11,10 @@ const FormInput = ({
   const isRequired = rules?.required;
 
   return (
-    <div style={{ marginBottom: "15px" }}>
-      <label>
+    <div className="mb-4 w-full">
+      <label className="block text-sm font-medium text-black mb-1">
         {label}
-        {isRequired && (
-          <span style={{ color: "red", marginLeft: "4px" }}>*</span>
-        )}
+        {isRequired && <span className="text-red-500 ml-1">*</span>}
       </label>
 
       <input
@@ -24,10 +22,12 @@ const FormInput = ({
         placeholder={placeholder}
         defaultValue={defaultValue}
         {...register(name, rules)}
+        className={`w-sm px-3 py-2 border rounded-lg outline-none transition text-black
+        `}
       />
 
       {errors?.[name] && (
-        <p style={{ color: "red", fontSize: "12px" }}>{errors[name].message}</p>
+        <p className="text-red-500 text-xs mt-1">{errors[name].message}</p>
       )}
     </div>
   );
