@@ -1,14 +1,33 @@
-import React from "react";
+const FormInput = ({
+  label,
+  type = "text",
+  name,
+  register,
+  rules = {},
+  errors,
+  placeholder,
+  defaultValue = "",
+}) => {
+  const isRequired = rules?.required;
 
-const FormInput = ({ label, register, name, errors, ...rest }) => {
   return (
-    <div>
-      <label>{label}</label>
+    <div style={{ marginBottom: "15px" }}>
+      <label>
+        {label}
+        {isRequired && (
+          <span style={{ color: "red", marginLeft: "4px" }}>*</span>
+        )}
+      </label>
 
-      <input {...register(name)} {...rest} />
+      <input
+        type={type}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        {...register(name, rules)}
+      />
 
       {errors?.[name] && (
-        <p className="error">{errors[name].message}</p>
+        <p style={{ color: "red", fontSize: "12px" }}>{errors[name].message}</p>
       )}
     </div>
   );

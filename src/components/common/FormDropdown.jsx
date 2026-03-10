@@ -1,9 +1,24 @@
-const FormDropdown = ({ label, register, name, options }) => {
-  return (
-    <div>
-      <label>{label}</label>
+const FormDropdown = ({
+  label,
+  name,
+  register,
+  options = [],
+  rules = {},
+  errors,
+  defaultValue = "",
+}) => {
+  const isRequired = rules?.required;
 
-      <select {...register(name)}>
+  return (
+    <div style={{ marginBottom: "15px" }}>
+      <label>
+        {label}
+        {isRequired && (
+          <span style={{ color: "red", marginLeft: "4px" }}>*</span>
+        )}
+      </label>
+
+      <select defaultValue={defaultValue} {...register(name, rules)}>
         <option value="">Select</option>
 
         {options.map((item) => (
@@ -12,6 +27,10 @@ const FormDropdown = ({ label, register, name, options }) => {
           </option>
         ))}
       </select>
+
+      {errors?.[name] && (
+        <p style={{ color: "red", fontSize: "12px" }}>{errors[name].message}</p>
+      )}
     </div>
   );
 };

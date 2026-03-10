@@ -1,17 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home/Home";
+import PrivateRoute from "./PrivateRoute";
+
 import Login from "../pages/Login/Login";
-import MainLayout from "../layout/MainLayout";
+import Home from "../pages/Home/Home";
+import NotFound from "../pages/NotFound/NotFound";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout />}>
+        {/* Public */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Private */}
+        <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
         </Route>
 
-        <Route path="/login" element={<Login />} />
+        {/* 404 Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
